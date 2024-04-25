@@ -1,6 +1,32 @@
 # FAST-LIO-ROS2
 > Maintainer: Yunlong Feng  
-> Modifier: Taeyoung Kim
+> Modifier: Taeyoung Kim  
+> Packaging: Enric Cervera
+
+## Execution of package
+Prerequisites:
+* [Docker](https://docs.docker.com/engine/install/ubuntu/)
+* [NVIDIA-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+* [OSRF-Rocker](https://github.com/osrf/rocker)
+
+Please download the rosbag files from the [M2DGR dataset](https://github.com/SJTU-ViSYS/M2DGR).
+
+**Terminal 1:**
+```
+rocker --nvidia --x11 \
+       ghcr.io/transmisiones-centauro/fast_lio_ros2:ros2
+```
+```
+source /ros2_ws/install/setup.bash
+ros2 launch fast_lio mapping_m2dgr.launch.py
+```
+
+**Terminal 2:**
+```
+docker run --rm -it --volume .:/bags \
+           osrf/ros:humble-desktop-full \
+           ros2 bag play /bags/gate_01
+```
 
 ## What's New?  
 - Dockerize

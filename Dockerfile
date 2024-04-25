@@ -12,3 +12,13 @@ RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git /Livox-SDK2 \
  && cmake .. && make -j install \
  && rm -fr /Livox-SDK2
 
+RUN mkdir -p /ros2_ws/src
+
+RUN git clone --recurse-submodules \
+      https://github.com/TransMisiones-Centauro/FAST_LIO_ROS2.git \
+      /ros2_ws/src
+
+RUN . /opt/ros/$ROS_DISTRO/setup.sh \
+ && cd /ros2_ws/src/livox_ros_driver2 \
+ && ./build.sh humble
+
